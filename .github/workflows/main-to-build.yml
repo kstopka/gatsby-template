@@ -48,20 +48,20 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: build
           folder: public
-  deploy-build-to-ftp:
-    name: Deploy to FTP
-    needs: main-to-build
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v4
-        with:
-          ref: build
-      - name: Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ftp.cluster028.hosting.ovh.net
-          username: kstopkm-ftp
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
+  # deploy-build-to-ftp:
+  #   name: Deploy to FTP
+  #   needs: main-to-build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: 🚚 Get latest code
+  #       uses: actions/checkout@v4
+  #       with:
+  #         ref: build
+  #     - name: Sync files
+  #       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+  #       with:
+  #         server: ftp.cluster028.hosting.ovh.net
+  #         username: kstopkm-ftp
+  #         password: ${{ secrets.FTP_PASSWORD }}
+  #         protocol: ftp
+  #         port: 21
