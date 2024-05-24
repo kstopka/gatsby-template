@@ -63,5 +63,5 @@ jobs:
           server: ftp.cluster028.hosting.ovh.net
           username: kstopkm
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftp
           port: 22
