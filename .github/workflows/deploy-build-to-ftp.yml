@@ -1,0 +1,22 @@
+name: deploy-build-to-ftp
+on:
+  repository_dispatch:
+    types: deploy-build-to-ftp
+
+jobs:
+  deploy-build-to-ftp:
+    name: Deploy to FTP
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+        with:
+          ref: build
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp.cluster028.hosting.ovh.net
+          username: kstopkm
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
