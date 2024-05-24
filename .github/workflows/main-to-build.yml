@@ -4,9 +4,9 @@ on:
   # schedule:
   #   - cron: '10 3 * * *'
 
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
 
   repository_dispatch:
     types: deploy-build-to-ftp
@@ -51,23 +51,23 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: build
           folder: public
-      - name: Trigger deploy to FTP
-        run: |
-          curl -X GET -H "Content-type: application/json" '${{ secrets.URL_TRIGGER }}'
-  # deploy-build-to-ftp:
-  #   name: Deploy to FTP
-  #   needs: main-to-build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: 🚚 Get latest code
-  #       uses: actions/checkout@v4
-  #       with:
-  #         ref: build
-  #     - name: Sync files
-  #       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-  #       with:
-  #         server: ftp.cluster028.hosting.ovh.net
-  #         username: kstopkm-ftp
-  #         password: ${{ secrets.FTP_PASSWORD }}
-  #         protocol: ftp
-  #         port: 21
+      # - name: Trigger deploy to FTP
+      #   run: |
+      #     curl -X GET -H "Content-type: application/json" '${{ secrets.URL_TRIGGER }}'
+  deploy-build-to-ftp:
+    name: Deploy to FTP
+    needs: main-to-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+        with:
+          ref: build
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp.cluster028.hosting.ovh.net
+          username: kstopkm-ftp
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
