@@ -2,6 +2,8 @@ import type { GatsbyConfig } from "gatsby";
 require("dotenv").config();
 const { WORDPRESS_GRAPHQL_ENDPOINT } = process.env;
 
+console.log("WORDPRESS_GRAPHQL_ENDPOINT", WORDPRESS_GRAPHQL_ENDPOINT);
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `gatsby-template`,
