@@ -1,0 +1,51 @@
+name: main-to-build
+
+on:
+  # schedule:
+  #   - cron: '10 3 * * *'
+
+  push:
+    branches:
+      - "main"
+
+  repository_dispatch:
+    types: main-to-build
+
+jobs:
+  main-to-build:
+    name: Build branch main to branch build
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          ref: main
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install deps and run tests
+        run: |
+          yarn install
+
+      - name: Build gatsby app
+        # env:
+        #   # NODE_OPTIONS: '--max-old-space-size=8192'
+        #   NODE_OPTIONS: '--max-old-space-size=4096'
+        #   GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: false
+        #   CI: false
+        run: |
+          npm run build
+
+      - name: Deploy to build branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: build
+          FOLDER: public
