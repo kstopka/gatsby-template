@@ -35,6 +35,8 @@ jobs:
           yarn install
 
       - name: Build gatsby app
+        env:
+          WORDPRESS_GRAPHQL_ENDPOINT: ${{ secrets.WORDPRESS_GRAPHQL_ENDPOINT }}
         # env:
         #   # NODE_OPTIONS: '--max-old-space-size=8192'
         #   NODE_OPTIONS: '--max-old-space-size=4096'
