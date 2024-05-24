@@ -8,9 +8,6 @@ on:
     branches:
       - "main"
 
-  repository_dispatch:
-    types: main-to-build
-
 jobs:
   main-to-build:
     name: Build branch main to branch build
@@ -48,6 +45,6 @@ jobs:
       - name: Deploy to build branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: build
-          FOLDER: public
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: build
+          folder: public
