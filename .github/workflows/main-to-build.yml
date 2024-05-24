@@ -50,6 +50,7 @@ jobs:
           folder: public
   deploy-build-to-ftp:
     name: Deploy to FTP
+    needs: main-to-build
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
