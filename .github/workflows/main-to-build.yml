@@ -12,51 +12,51 @@ on:
     types: deploy-build-to-ftp
 
 jobs:
-  main-to-build:
-    name: Build branch main to branch build
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        node-version: [18.x]
+  # main-to-build:
+  #   name: Build branch main to branch build
+  #   runs-on: ubuntu-20.04
+  #   strategy:
+  #     matrix:
+  #       node-version: [18.x]
 
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          ref: main
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         persist-credentials: false
+  #         ref: main
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
 
-      - name: Install deps and run tests
-        run: |
-          yarn install
+  #     - name: Install deps and run tests
+  #       run: |
+  #         yarn install
 
-      - name: Build gatsby app
-        env:
-          WORDPRESS_GRAPHQL_ENDPOINT: ${{ secrets.WORDPRESS_GRAPHQL_ENDPOINT }}
-        # env:
-        #   # NODE_OPTIONS: '--max-old-space-size=8192'
-        #   NODE_OPTIONS: '--max-old-space-size=4096'
-        #   GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: false
-        #   CI: false
-        run: |
-          npm run build
+  #     - name: Build gatsby app
+  #       env:
+  #         WORDPRESS_GRAPHQL_ENDPOINT: ${{ secrets.WORDPRESS_GRAPHQL_ENDPOINT }}
+  #       # env:
+  #       #   # NODE_OPTIONS: '--max-old-space-size=8192'
+  #       #   NODE_OPTIONS: '--max-old-space-size=4096'
+  #       #   GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: false
+  #       #   CI: false
+  #       run: |
+  #         npm run build
 
-      - name: Deploy to build branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: build
-          folder: public
-      # - name: Trigger deploy to FTP
-      #   run: |
-      #     curl -X GET -H "Content-type: application/json" '${{ secrets.URL_TRIGGER }}'
+  #     - name: Deploy to build branch
+  #       uses: JamesIves/github-pages-deploy-action@v4
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         branch: build
+  #         folder: public
+  #     # - name: Trigger deploy to FTP
+  #     #   run: |
+  #     #     curl -X GET -H "Content-type: application/json" '${{ secrets.URL_TRIGGER }}'
   deploy-build-to-ftp:
     name: Deploy to FTP
-    needs: main-to-build
+    # needs: main-to-build
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
