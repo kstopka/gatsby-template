@@ -64,4 +64,4 @@ jobs:
           username: kstopkm
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
-          port: 22
+          port: 21
