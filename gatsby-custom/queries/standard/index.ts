@@ -16,6 +16,13 @@ class StandardResourceClass {
             slug
             title
             content
+            acfHome {
+              content {
+                title
+                language
+                description
+              }
+            }
           }
         }
       }
