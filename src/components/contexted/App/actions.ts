@@ -1,14 +1,14 @@
-import { IAppState, Language } from "./types";
+import { IAppState, Language, Theme } from "./types";
 
 class AppActions {
   loaded = (state: IAppState) => ({
     ...state,
-    imBusy: false,
+    isBusy: false,
   });
 
   loading = (state: IAppState) => ({
     ...state,
-    imBusy: true,
+    isBusy: true,
   });
 
   changeIsModalOpen = (state: IAppState, payload: boolean) => ({
@@ -26,9 +26,15 @@ class AppActions {
     language: state.language === "PL" ? ("EN" as Language) : ("PL" as Language),
   });
 
-  loadLanguage = (state: IAppState, language: Language) => ({
+  toggleTheme = (state: IAppState) => ({
     ...state,
-    language,
+    theme: state.theme === "dark" ? ("light" as Theme) : ("dark" as Theme),
+  });
+
+  setLoad = (state: IAppState, payload: IAppState) => ({
+    ...state,
+    language: payload.language,
+    theme: payload.theme,
   });
 }
 

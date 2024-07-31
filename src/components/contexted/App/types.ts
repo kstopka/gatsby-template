@@ -1,11 +1,13 @@
 import { ReactNode, Dispatch } from "react";
 
 type Language = "PL" | "EN";
+type Theme = "dark" | "light";
 
 interface IAppState {
-  imBusy: boolean;
+  isBusy: boolean;
   isModalOpen: boolean;
   language: Language;
+  theme: Theme;
 }
 
 type AppActionType =
@@ -17,9 +19,10 @@ type AppActionType =
       payload: boolean;
     }
   | { type: "toggleLanguage" }
+  | { type: "toggleTheme" }
   | {
-      type: "loadLanguage";
-      payload: Language;
+      type: "setLoad";
+      payload: IAppState;
     };
 
 interface IAppActions {
@@ -28,7 +31,8 @@ interface IAppActions {
   toggleIsModalOpen: () => void;
   changeIsModalOpen: (value: boolean) => void;
   toggleLanguage: () => void;
-  loadLanguage: (value: Language) => void;
+  toggleTheme: () => void;
+  setLoad: (value: IAppState) => void;
 }
 
 interface AppProviderProps {
@@ -48,4 +52,5 @@ export {
   AppProviderProps,
   IAppContext,
   Language,
+  Theme,
 };

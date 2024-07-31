@@ -1,4 +1,4 @@
-import { AppProviderProps, Language } from "./types";
+import { AppProviderProps, IAppState, Language } from "./types";
 
 import React, { useReducer, useEffect, useLayoutEffect } from "react";
 
@@ -16,10 +16,10 @@ const AppProvider: React.FC<AppProviderProps> = ({
     onLoad(dispatch);
     const appCtx = localStorage.getItem("AppCtx");
     if (appCtx) {
-      const { language } = JSON.parse(appCtx);
+      const parsedAppCtx = JSON.parse(appCtx);
       dispatch({
-        type: "loadLanguage",
-        payload: language as Language,
+        type: "setLoad",
+        payload: parsedAppCtx as IAppState,
       });
     }
   }, []);

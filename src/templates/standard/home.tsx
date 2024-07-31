@@ -7,6 +7,7 @@ import {
   useContextState,
 } from "../../components/contexted";
 import { IAppActions, IAppState } from "../../components/contexted/App/types";
+import Layout from "../../components/Layout/Layout";
 
 interface HomeProps {
   pageContext: {
@@ -39,11 +40,11 @@ const HomePage: React.FC<HomeProps> = ({ pageContext }) => {
   }, [language, acfHome.content]);
 
   return (
-    <>
+    <Layout>
       <div dangerouslySetInnerHTML={{ __html: title }} />
       <div dangerouslySetInnerHTML={{ __html: description }} />
       <button onClick={toggleLanguage}>{language}</button>
-    </>
+    </Layout>
   );
 };
 export default HomePage;

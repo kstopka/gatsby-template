@@ -1,9 +1,10 @@
 import { IAppState } from "./types";
 
 const initialState: IAppState = {
-  imBusy: true,
+  isBusy: true,
   isModalOpen: false,
   language: "PL",
+  theme: "dark",
 };
 
 export default initialState;

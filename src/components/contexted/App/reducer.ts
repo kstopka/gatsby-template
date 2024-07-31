@@ -15,8 +15,10 @@ function appReducer(state = initialState, action: AppActionType): IAppState {
       return actions.toggleIsModalOpen(state);
     case "toggleLanguage":
       return actions.toggleLanguage(state);
-    case "loadLanguage":
-      return actions.loadLanguage(state, action.payload);
+    case "toggleTheme":
+      return actions.toggleTheme(state);
+    case "setLoad":
+      return actions.setLoad(state, action.payload);
 
     default:
       throw new Error("Wrong action type in app reducer");
