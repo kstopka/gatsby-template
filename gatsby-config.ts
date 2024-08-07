@@ -37,6 +37,9 @@ const config: GatsbyConfig = {
       },
       __key: "images",
     },
+    {
+      resolve: `gatsby-plugin-offline`,
+    },
   ],
 };
 
