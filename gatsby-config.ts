@@ -45,7 +45,7 @@ const config: GatsbyConfig = {
           skipWaiting: true,
           clientsClaim: true,
         },
-        appendScript: path.resolve(`./src/custom-sw-code.js`),
+        appendScript: path.resolve(`./src/custom-sw-code.ts`),
       },
     },
   ],
