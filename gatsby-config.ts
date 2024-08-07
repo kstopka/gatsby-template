@@ -39,6 +39,13 @@ const config: GatsbyConfig = {
     },
     {
       resolve: `gatsby-plugin-offline`,
+      options: {
+        workboxConfig: {
+          skipWaiting: true,
+          clientsClaim: true,
+        },
+        appendScript: require.resolve(`./src/custom-sw-code.js`),
+      },
     },
   ],
 };
