@@ -33,11 +33,11 @@ self.__precacheManifest = [
     "url": "framework-02b985a5d0f7bd29f554.js"
   },
   {
-    "url": "app-07922d352cd4128243f3.js"
+    "url": "app-ec709658ab7c9b5e41c4.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "16620cd7587e778c84a87949d7626bab"
+    "revision": "1516877344142f0ea109362e8f015dfe"
   },
   {
     "url": "manifest.webmanifest",
@@ -151,7 +151,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-07922d352cd4128243f3.js`))) {
+  if (!resources || !(await caches.match(`/app-ec709658ab7c9b5e41c4.js`))) {
     return await fetch(event.request)
   }
 
@@ -173,3 +173,21 @@ workbox.routing.registerRoute(navigationRoute)
 
 // this route is used when performing a non-navigation request (e.g. fetch)
 workbox.routing.registerRoute(/\/.gatsby-plugin-offline:.+/, handleAPIRequest)
+
+self.addEventListener("message", (event) => {
+  if (event.data === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(clients.claim());
+});
+
+self.addEventListener("controllerchange", () => {
+  window.location.reload();
+});
