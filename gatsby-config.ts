@@ -1,4 +1,5 @@
 import type { GatsbyConfig } from "gatsby";
+import path from "path";
 require("dotenv").config();
 const { WORDPRESS_GRAPHQL_ENDPOINT } = process.env;
 
@@ -44,7 +45,7 @@ const config: GatsbyConfig = {
           skipWaiting: true,
           clientsClaim: true,
         },
-        appendScript: require.resolve(`./src/custom-sw-code.js`),
+        appendScript: path.resolve(`./src/custom-sw-code.js`),
       },
     },
   ],
