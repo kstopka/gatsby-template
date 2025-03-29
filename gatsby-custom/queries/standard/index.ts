@@ -23,6 +23,16 @@ class StandardResourceClass {
                 description
               }
             }
+            acfContact {
+              content {
+                city
+                country
+                email
+                github
+                language
+                linkedin
+              }
+            }
           }
         }
       }

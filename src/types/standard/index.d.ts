@@ -6,6 +6,7 @@ export interface IPage {
   title: string;
   content: string;
   acfHome: IAcfHome;
+  acfContact: IAcfContact;
 }
 
 export interface IAcfHome {
@@ -13,5 +14,15 @@ export interface IAcfHome {
     title: string;
     language: Language;
     description: string;
+  }[];
+}
+export interface IAcfContact {
+  content: {
+    language: Language;
+    city: string;
+    country: string;
+    email: string;
+    github: string;
+    linkedin: string;
   }[];
 }
