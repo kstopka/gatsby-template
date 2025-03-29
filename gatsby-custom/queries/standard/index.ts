@@ -17,20 +17,18 @@ class StandardResourceClass {
             title
             content
             acfHome {
-              content {
+              homecontent {
                 title
                 language
                 description
               }
             }
             acfContact {
-              content {
+              contactContent {
+                language
                 city
                 country
                 email
-                github
-                language
-                linkedin
               }
             }
           }

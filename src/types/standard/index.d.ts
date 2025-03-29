@@ -10,14 +10,14 @@ export interface IPage {
 }
 
 export interface IAcfHome {
-  content: {
+  homecontent: {
     title: string;
     language: Language;
     description: string;
   }[];
 }
 export interface IAcfContact {
-  content: {
+  contactContent: {
     language: Language;
     city: string;
     country: string;

@@ -12,13 +12,12 @@ interface HomeProps {
 const HomePage: React.FC<HomeProps> = ({ pageContext }) => {
   const { page } = pageContext;
   const { acfHome } = page;
-  const selectedContent = useContentByLanguage(acfHome.content);
+  const selectedContent = useContentByLanguage(acfHome.homecontent);
 
   if (!selectedContent) return <Loading />;
 
   return (
     <Layout>
-      <p>{selectedContent.title}</p>
       <div dangerouslySetInnerHTML={{ __html: selectedContent.title }} />
       <div dangerouslySetInnerHTML={{ __html: selectedContent.description }} />
     </Layout>

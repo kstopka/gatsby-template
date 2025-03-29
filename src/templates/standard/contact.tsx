@@ -12,7 +12,7 @@ interface ContactProps {
 const ContactPage: React.FC<ContactProps> = ({ pageContext }) => {
   const { page } = pageContext;
   const { acfContact } = page;
-  const selectedContent = useContentByLanguage(acfContact.content);
+  const selectedContent = useContentByLanguage(acfContact.contactContent);
 
   if (!selectedContent) return <Loading />;
 
