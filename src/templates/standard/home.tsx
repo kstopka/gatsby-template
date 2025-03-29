@@ -18,6 +18,7 @@ const HomePage: React.FC<HomeProps> = ({ pageContext }) => {
 
   return (
     <Layout>
+      <p>{selectedContent.title}</p>
       <div dangerouslySetInnerHTML={{ __html: selectedContent.title }} />
       <div dangerouslySetInnerHTML={{ __html: selectedContent.description }} />
     </Layout>
