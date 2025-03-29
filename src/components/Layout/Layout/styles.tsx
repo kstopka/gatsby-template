@@ -8,7 +8,7 @@ export const Layout = styled.div`
   justify-content: space-between;
 `;
 
-export const Test = styled.div`
+export const Test = styled.p`
   color: ${(props) => props.theme.colors.primary[10]};
 `;
 export const Main = styled.main`

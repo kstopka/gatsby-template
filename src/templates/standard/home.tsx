@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { IPage } from "../../types/standard";
-import {
-  AppCtx,
-  useActions,
-  useContextState,
-} from "../../components/contexted";
-import { IAppActions, IAppState } from "../../components/contexted/App/types";
-import Layout from "../../components/Layout/Layout";
+import useContentByLanguage from "../../hooks/useContentByLanguage";
+import { Layout, Loading } from "../../components/Layout";
 
 interface HomeProps {
   pageContext: {
@@ -18,32 +12,14 @@ interface HomeProps {
 const HomePage: React.FC<HomeProps> = ({ pageContext }) => {
   const { page } = pageContext;
   const { acfHome } = page;
-  const { language } = useContextState<IAppState>(AppCtx, ["language"]);
-  const { toggleLanguage } = useActions<IAppActions>(AppCtx, [
-    "toggleLanguage",
-  ]);
-  const [{ title, description }, setContent] = useState({
-    title: "",
-    description: "",
-  });
+  const selectedContent = useContentByLanguage(acfHome.content);
 
-  useEffect(() => {
-    const result = acfHome.content.find(
-      (content) => content.language === language
-    );
-    if (result) {
-      setContent({
-        title: result.title,
-        description: result.description,
-      });
-    }
-  }, [language, acfHome.content]);
+  if (!selectedContent) return <Loading />;
 
   return (
     <Layout>
-      <div dangerouslySetInnerHTML={{ __html: title }} />
-      <div dangerouslySetInnerHTML={{ __html: description }} />
-      <button onClick={toggleLanguage}>{language}</button>
+      <div dangerouslySetInnerHTML={{ __html: selectedContent.title }} />
+      <div dangerouslySetInnerHTML={{ __html: selectedContent.description }} />
     </Layout>
   );
 };

@@ -13,12 +13,19 @@ interface ILayout {
 
 const Layout: React.FC<ILayout> = ({ children }): JSX.Element => {
   const location = useLocation();
-  const { theme: themeValue } = useContextState<IAppState>(AppCtx, ["theme"]);
-  const { toggleTheme } = useActions<IAppActions>(AppCtx, ["toggleTheme"]);
+  const { theme: themeValue, language } = useContextState<IAppState>(AppCtx, [
+    "theme",
+    "language",
+  ]);
+  const { toggleTheme, toggleLanguage } = useActions<IAppActions>(AppCtx, [
+    "toggleTheme",
+    "toggleLanguage",
+  ]);
 
   return (
     <ThemeProvider theme={theme[themeValue]}>
       <button onClick={toggleTheme}>{themeValue}</button>
+      <button onClick={toggleLanguage}>{language}</button>
       <S.Test>test</S.Test>
       <S.Layout>
         <S.Main>{children}</S.Main>
