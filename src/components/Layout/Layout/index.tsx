@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "../../../styles/theme";
 import { AppCtx, useActions, useContextState } from "../../contexted";
 import { IAppState, IAppActions } from "../../contexted/App/types";
+import { GlobalStyles } from "../../../styles/global";
 
 interface ILayout {
   children: React.ReactNode;
@@ -24,6 +25,7 @@ const Layout: React.FC<ILayout> = ({ children }): JSX.Element => {
 
   return (
     <ThemeProvider theme={theme[themeValue]}>
+      <GlobalStyles />
       <button onClick={toggleTheme}>{themeValue}</button>
       <button onClick={toggleLanguage}>{language}</button>
       <S.Test>test</S.Test>

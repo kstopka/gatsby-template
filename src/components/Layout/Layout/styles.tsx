@@ -6,11 +6,13 @@ export const Layout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 export const Test = styled.p`
   color: ${(props) => props.theme.colors.primary[10]};
 `;
+
 export const Main = styled.main`
   margin: 0 auto;
   max-width: ${(props) => props.theme.layout.maxWidth};
