@@ -1,8 +1,8 @@
-/* eslint-disable */
 import { useContext, Context } from "react";
-
 import { AppProvider, AppCtx } from "./App/Provider";
 import { WindowProvider, WindowCtx } from "./Window/Provider";
+import { IAppState, IAppActions } from "./App/types";
+import { IWindowState, IWindowActions } from "./Window/types";
 
 interface ElasticObject {
   [key: string]: any;
@@ -62,4 +62,8 @@ export {
   AppCtx,
   WindowProvider,
   WindowCtx,
+  IAppState,
+  IAppActions,
+  IWindowState,
+  IWindowActions,
 };

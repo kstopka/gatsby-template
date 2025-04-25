@@ -4,9 +4,10 @@ import * as S from "./styles";
 
 import { ThemeProvider } from "styled-components";
 import theme from "../../../styles/theme";
-import { AppCtx, useActions, useContextState } from "../../contexted";
-import { IAppState, IAppActions } from "../../contexted/App/types";
+import { AppCtx, useContextState } from "../../contexted";
+import { IAppState } from "../../contexted/App/types";
 import { GlobalStyles } from "../../../styles/global";
+import Navbar from "../../Navbar";
 
 interface ILayout {
   children: React.ReactNode;
@@ -14,23 +15,17 @@ interface ILayout {
 
 const Layout: React.FC<ILayout> = ({ children }): JSX.Element => {
   const location = useLocation();
-  const { theme: themeValue, language } = useContextState<IAppState>(AppCtx, [
-    "theme",
-    "language",
-  ]);
-  const { toggleTheme, toggleLanguage } = useActions<IAppActions>(AppCtx, [
-    "toggleTheme",
-    "toggleLanguage",
-  ]);
+  const { theme: themeValue } = useContextState<IAppState>(AppCtx, ["theme"]);
 
   return (
     <ThemeProvider theme={theme[themeValue]}>
       <GlobalStyles />
-      <button onClick={toggleTheme}>{themeValue}</button>
-      <button onClick={toggleLanguage}>{language}</button>
-      <S.Test>test</S.Test>
       <S.Layout>
+        <Navbar />
         <S.Main>{children}</S.Main>
+        <div className="footer">
+          <p>Foooter</p>
+        </div>
       </S.Layout>
     </ThemeProvider>
   );

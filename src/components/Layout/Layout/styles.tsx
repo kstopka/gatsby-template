@@ -19,6 +19,7 @@ export const Main = styled.main`
   padding: 0 ${(props) => props.theme.layout.paddingXMobile};
   width: 100%;
   overflow: hidden;
+  flex-grow: 1;
 
   @media (min-width: ${(props) => props.theme.breakpoints.sm}) {
     padding: 0 ${(props) => props.theme.layout.paddingX};
