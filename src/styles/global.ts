@@ -20,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
         font-family: ${({ theme }) => theme.fonts.family.main};
         overflow: hidden;
         overflow-y: scroll;
+        color: ${(props) => props.theme.colors.neutral[10]};
 
         &.blocked {
             overflow-y: hidden

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./styles";
-import URL_PATHS from "../../constants/routes";
+import { URL_PATHS_Arr, URL_PATHS } from "../../constants";
 import {
   AppCtx,
   useActions,
@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
 
   return (
     <S.Nav>
-      <S.LogoLink to="/">MyApp</S.LogoLink>
+      <S.LogoLink to={URL_PATHS.home.path}>MyApp</S.LogoLink>
       <S.HamburgerButton onClick={toggleMobileMenu}>
         <span></span>
         <span></span>
@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
       </S.HamburgerButton>
 
       <S.NavLinksContainer isOpen={isMobileMenuOpen}>
-        {URL_PATHS.map((link) => (
+        {URL_PATHS_Arr.map((link) => (
           <S.NavLink
             key={link[language]}
             to={link.path}

@@ -1,3 +1,3 @@
-import URL_PATHS from "./routes";
+import { URL_PATHS, URL_PATHS_Arr } from "./routes";
 
-export { URL_PATHS };
+export { URL_PATHS, URL_PATHS_Arr };

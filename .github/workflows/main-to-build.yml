@@ -1,64 +1,64 @@
-name: main-to-build
+# name: main-to-build
 
-on:
-  push:
-    branches:
-      - "main"
+# on:
+#   push:
+#     branches:
+#       - "main"
 
-  repository_dispatch:
-    types: main-to-build
+#   repository_dispatch:
+#     types: main-to-build
 
-jobs:
-  main-to-build:
-    name: Build branch main to branch build
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        node-version: [18.x]
+# jobs:
+#   main-to-build:
+#     name: Build branch main to branch build
+#     runs-on: ubuntu-20.04
+#     strategy:
+#       matrix:
+#         node-version: [18.x]
 
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          ref: main
+#     steps:
+#       - uses: actions/checkout@v3
+#         with:
+#           persist-credentials: false
+#           ref: main
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
 
-      - name: Install deps and run tests
-        run: |
-          yarn install
+#       - name: Install deps and run tests
+#         run: |
+#           yarn install
 
-      - name: Build gatsby app
-        env:
-          WORDPRESS_GRAPHQL_ENDPOINT: ${{ secrets.WORDPRESS_GRAPHQL_ENDPOINT }}
-        run: |
-          npm run build
+#       - name: Build gatsby app
+#         env:
+#           WORDPRESS_GRAPHQL_ENDPOINT: ${{ secrets.WORDPRESS_GRAPHQL_ENDPOINT }}
+#         run: |
+#           npm run build
 
-      - name: Deploy to build branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: build
-          folder: public
+#       - name: Deploy to build branch
+#         uses: JamesIves/github-pages-deploy-action@v4
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           branch: build
+#           folder: public
 
-  deploy-build-to-ftp:
-    name: Deploy to FTP
-    needs: main-to-build
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v4
-        with:
-          ref: build
-      - name: Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{secrets.FTP_SERVER}}
-          username: ${{secrets.FTP_USERNAME}}
-          password: ${{secrets.FTP_PASSWORD}}
-          protocol: ftp
-          port: 21
-          server-dir: home/
+#   deploy-build-to-ftp:
+#     name: Deploy to FTP
+#     needs: main-to-build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: 🚚 Get latest code
+#         uses: actions/checkout@v4
+#         with:
+#           ref: build
+#       - name: Sync files
+#         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+#         with:
+#           server: ${{secrets.FTP_SERVER}}
+#           username: ${{secrets.FTP_USERNAME}}
+#           password: ${{secrets.FTP_PASSWORD}}
+#           protocol: ftp
+#           port: 21
+#           server-dir: home/

@@ -1,49 +1,37 @@
-import * as React from "react"
-import { Link, HeadFC, PageProps } from "gatsby"
+import React from "react";
+import { HeadFC, PageProps } from "gatsby";
+import { Layout } from "../components/Layout";
+import { useContextState, IAppState, AppCtx } from "../components/contexted";
+import { navigate } from "gatsby";
+import { URL_PATHS } from "../constants";
+import Button from "../components/atoms/Button";
 
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
-
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
-
+const TranslateNotFoundPage = {
+  title: {
+    PL: "Strona nie znaleziona",
+    EN: "Page not found",
+  },
+  description: {
+    PL: "Nie znaleziono strony, która mogła by być wyświetlona. Kliknij aby wrócić do strony głównej.",
+    EN: "The page you are looking for could not be found. Click to go back to the home page.",
+  },
+};
 const NotFoundPage: React.FC<PageProps> = () => {
+  const { language } = useContextState<IAppState>(AppCtx, ["language"]);
+  const { title, description } = TranslateNotFoundPage;
+
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </main>
-  )
-}
+    <Layout>
+      <h1>{title[language]}</h1>
+      <p>{description[language]}</p>
+      <Button
+        onClick={() => navigate(URL_PATHS.home.path)}
+        label={URL_PATHS.home[language]}
+      ></Button>
+    </Layout>
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;
 
-export const Head: HeadFC = () => <title>Not found</title>
+export const Head: HeadFC = () => <title>Not found</title>;
