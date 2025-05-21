@@ -62,8 +62,6 @@ export {
   AppCtx,
   WindowProvider,
   WindowCtx,
-  IAppState,
-  IAppActions,
-  IWindowState,
-  IWindowActions,
 };
+
+export type { IAppState, IAppActions, IWindowState, IWindowActions };

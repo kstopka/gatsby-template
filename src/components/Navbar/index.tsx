@@ -8,6 +8,8 @@ import {
   IAppState,
   IAppActions,
 } from "../contexted";
+import { translateTheme } from "./translate";
+import Button from "../atoms/Button";
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -36,16 +38,24 @@ const Navbar: React.FC = () => {
       <S.NavLinksContainer isOpen={isMobileMenuOpen}>
         {URL_PATHS.map((link) => (
           <S.NavLink
-            key={link.name}
+            key={link[language]}
             to={link.path}
             onClick={() => setIsMobileMenuOpen(false)}
             activeClassName="active"
           >
-            {link.name}
+            {link[language]}
           </S.NavLink>
         ))}
-        <S.ToggleButton onClick={toggleTheme}>{themeValue}</S.ToggleButton>
-        <S.ToggleButton onClick={toggleLanguage}>{language}</S.ToggleButton>
+        <Button
+          onClick={toggleTheme}
+          label={translateTheme[themeValue][language]}
+          variant="menuToggle"
+        />
+        <Button
+          onClick={toggleLanguage}
+          label={language}
+          variant="menuToggle"
+        />
       </S.NavLinksContainer>
     </S.Nav>
   );

@@ -86,33 +86,6 @@ export const NavLinksContainer = styled.div<NavLinksContainerProps>`
   }
 `;
 
-export const ToggleButton = styled.button`
-  background: none;
-  border: 1px solid ${(props) => props.theme.colors.neutral[70]};
-  color: ${(props) => props.theme.colors.neutral[30]};
-  padding: 0.3rem 0.6rem;
-  margin: 0.5rem 0;
-  width: 100%;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: ${(props) => props.theme.fonts.size.small};
-  transition: ${(props) => props.theme.transitions.standard};
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.neutral[90]};
-    border-color: ${(props) => props.theme.colors.neutral[50]};
-    color: ${(props) => props.theme.colors.neutral[10]};
-  }
-
-  @media (min-width: ${(props) => props.theme.breakpoints.sm}) {
-    margin: 0;
-    margin-left: 0.5rem;
-    width: auto;
-    text-align: left;
-  }
-`;
-
 export const NavLink = styled(Link)`
   color: ${(props) => props.theme.colors.neutral[10]};
   text-decoration: none;

@@ -1,11 +1,8 @@
 // INFO: URL_PATHS
 const URL_PATHS = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Contact", path: "/contact" },
-  // { name: "Blog", path: "/blog" },
-  // { name: "Services", path: "/services" },
-  // { name: "Portfolio", path: "/portfolio" },
+  { PL: "Strona Główna", EN: "Home", path: "/" },
+  { PL: "O mnie", EN: "About", path: "/about" },
+  { PL: "Kontakt", EN: "Contact", path: "/contact" },
 ];
 
 export default URL_PATHS;
